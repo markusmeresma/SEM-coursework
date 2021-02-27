@@ -1,4 +1,4 @@
-# USE CASE: 20 Produce a Report on the top N populated capital cities in a continent where N is provided by the user.
+# USE CASE: 22 Produce a Report on the top N populated capital cities in a region where N is provided by the user.
 
 
 ## CHARACTERISTIC INFORMATION
@@ -6,7 +6,7 @@
 ### Goal in Context
 
 As an *user* I want *to produce the following report to be generated
-on the top N populated capital cities in the continent where N is provided by the user* so that *I can report on population information*.
+on the top N populated capital cities in a region where N is provided by the user* so that *I can report on population information*.
 
 ### Scope
 
@@ -34,12 +34,12 @@ Organisation.
 
 ### Trigger
 
-A request for population on the top N populated capital cities in the world where N is provided by the user.
+A request for population on the top N populated capital cities in a region where N is provided by the user.
 
 ## MAIN SUCCESS SCENARIO
 
-1. The user requests population information about the top N populated capital cities in a continent where N is provided by the user.
-2. The user gets the top N populated capital cities in a continent information.
+1. The user requests population information about the top N populated capital cities in a region where N is provided by the user.
+2. The user gets the top N populated capital cities in a region information.
 3. The user takes out the information about the city population.
 4. The user provides report about population information.
 
