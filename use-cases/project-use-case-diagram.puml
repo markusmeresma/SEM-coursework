@@ -1,0 +1,48 @@
+@startuml
+
+actor "Organisation" as "org"
+actor "User"
+
+rectangle DB
+
+rectangle System{
+    usecase uc1 as "Get population report"
+    usecase uc_pc as "in Continent"
+    usecase uc_pcn as "in Country"
+    usecase uc_pr as "in Region"
+    usecase uc_pdt as "in District"
+    usecase uc_pct as "in City"
+    usecase uc_filter as "filtered by"
+    usecase uc_f_c as "Continent"
+    usecase uc_f_cn as "Country"
+    usecase uc_f_r as "Region"
+    usecase uc_f_dt as "District"
+    usecase uc_f_ct as "City"
+
+    org -- uc1
+    uc1 - DB
+    uc1 ..> uc_pc : extend
+    uc1 ..> uc_pcn : extend
+    uc1 ..> uc_pr : extend
+    uc1 ..> uc_pdt : extend
+    uc1 ..> uc_pct : extend
+    uc_pc ..> uc_filter : extend
+    uc_pcn ..> uc_filter : extend
+    uc_pr ..> uc_filter : extend
+    uc_pdt ..> uc_filter : extend
+    uc_pct ..> uc_filter : extend
+    uc_filter ..> uc_f_c : include
+    uc_filter ..> uc_f_cn : include
+    uc_filter ..> uc_f_r : include
+    uc_filter ..> uc_f_dt : include
+    uc_filter ..> uc_f_ct: include
+
+    }
+@enduml
+
+this code is only here as a pastebin in case we need more verbose expressions
+    uc_pct ..> uc_f_ct : exclude
+    uc_pdt ..> uc_f_dt : exclude
+    uc_pr ..> uc_f_r : exclude
+    uc_pcn ..> uc_f_cn : exclude
+    uc_pc ..> uc_f_c : exclude
