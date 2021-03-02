@@ -1,13 +1,17 @@
 @startuml
 
-actor "Organisation" as "org"
+actor "Organisation" as org
 actor "User"
 
-rectangle DB
+rectangle DB as "Database"
 
 rectangle System{
-    usecase uc_report as "Get report for..."
+    usecase uc_report as "Generate complete report for..."
+    usecase uc_topN as "Generate top N report for..."
+    usecase uc_getInfo as "Get information for..."
+    usecase uc_rp as "Provide rankings and percentages for..."
     usecase uc1 as "Population"
+    usecase uc2 as "Language"
     usecase uc_pc as "in Continent"
     usecase uc_pcn as "in Country"
     usecase uc_pr as "in Region"
@@ -20,9 +24,17 @@ rectangle System{
     usecase uc_f_dt as "District"
     usecase uc_f_ct as "City"
 
-    org - uc_report
-    uc_report -- uc1
-    uc1 - DB
+    org -- uc_report
+    org -- uc_getInfo
+    org -- uc_rp
+
+    uc_report -- uc1 : include
+    uc_getInfo -- uc1 : include
+    uc_rp -- uc2 : include
+    uc_report -- DB
+    uc_getInfo -- DB
+    uc_rp -- DB
+
     uc1 ..> uc_pc : extend
     uc1 ..> uc_pcn : extend
     uc1 ..> uc_pr : extend
@@ -33,12 +45,14 @@ rectangle System{
     uc_pr ..> uc_filter : extend
     uc_pdt ..> uc_filter : extend
     uc_pct ..> uc_filter : extend
-    uc_filter ..> uc_f_c : include
-    uc_filter ..> uc_f_cn : include
-    uc_filter ..> uc_f_r : include
-    uc_filter ..> uc_f_dt : include
-    uc_filter ..> uc_f_ct: include
+    uc_filter ..> uc_f_c : extend
+    uc_filter ..> uc_f_cn : extend
+    uc_filter ..> uc_f_r : extend
+    uc_filter ..> uc_f_dt : extend
+    uc_filter ..> uc_f_ct: extend
 
+    User -- uc_topN
+    uc_topN -- uc1
     }
 @enduml
 
