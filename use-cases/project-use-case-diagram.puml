@@ -1,0 +1,64 @@
+@startuml
+
+actor "Organisation" as org
+actor "User"
+
+rectangle DB as "Database"
+
+rectangle System{
+    usecase uc_report as "Generate complete report for..."
+    usecase uc_topN as "Generate top N report for..."
+    usecase uc_getInfo as "Get information for..."
+    usecase uc_rp as "Provide rankings and percentages for..."
+    usecase uc1 as "Population"
+    usecase uc2 as "Language"
+    usecase uc_pc as "in Continent"
+    usecase uc_pcn as "in Country"
+    usecase uc_pr as "in Region"
+    usecase uc_pdt as "in District"
+    usecase uc_pct as "in City"
+    usecase uc_filter as "filtered by"
+    usecase uc_f_c as "Continent"
+    usecase uc_f_cn as "Country"
+    usecase uc_f_r as "Region"
+    usecase uc_f_dt as "District"
+    usecase uc_f_ct as "City"
+
+    org -- uc_report
+    org -- uc_getInfo
+    org -- uc_rp
+
+    uc_report -- uc1 : include
+    uc_getInfo -- uc1 : include
+    uc_rp -- uc2 : include
+    uc_report -- DB
+    uc_getInfo -- DB
+    uc_rp -- DB
+
+    uc1 ..> uc_pc : extend
+    uc1 ..> uc_pcn : extend
+    uc1 ..> uc_pr : extend
+    uc1 ..> uc_pdt : extend
+    uc1 ..> uc_pct : extend
+    uc_pc ..> uc_filter : extend
+    uc_pcn ..> uc_filter : extend
+    uc_pr ..> uc_filter : extend
+    uc_pdt ..> uc_filter : extend
+    uc_pct ..> uc_filter : extend
+    uc_filter ..> uc_f_c : extend
+    uc_filter ..> uc_f_cn : extend
+    uc_filter ..> uc_f_r : extend
+    uc_filter ..> uc_f_dt : extend
+    uc_filter ..> uc_f_ct: extend
+
+    User -- uc_topN
+    uc_topN -- uc1
+    }
+@enduml
+
+this code is only here as a pastebin in case we need more verbose expressions
+    uc_pct ..> uc_f_ct : exclude
+    uc_pdt ..> uc_f_dt : exclude
+    uc_pr ..> uc_f_r : exclude
+    uc_pcn ..> uc_f_cn : exclude
+    uc_pc ..> uc_f_c : exclude
