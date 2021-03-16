@@ -6,15 +6,7 @@
 
     <groupId>com.napier.sem</groupId>
     <artifactId>seCoursework</artifactId>
-    <version>0.1.0.2</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver</artifactId>
-            <version>3.6.4</version>
-        </dependency>
-    </dependencies>
+    <version>0.1.0.3</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
