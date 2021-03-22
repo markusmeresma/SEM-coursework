@@ -18,10 +18,12 @@ public class App {
 
         ContinentQueries continentQueries = new ContinentQueries(db.getConn());
 
-        List<Country> countries = continentQueries.getPopulationDescending();
+        List<Country> countriesDesc = continentQueries.getPopulationDescending();
+        List<Country> countriesAsc = continentQueries.getPopulationAscending();
 
-        for (var country : countries) {
-            System.out.println(country.toString());
+        for(int i = 0; i < countriesAsc.size(); i++) {
+            System.out.println(countriesAsc.get(i));
+            System.out.println(countriesDesc.get(i));
         }
         db.disconnect();
     }
