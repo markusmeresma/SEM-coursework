@@ -3,7 +3,6 @@ package com.napier.sem;
 import com.napier.sem.objects.Country;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,16 +17,25 @@ public class AppIntegrationTest {
     @BeforeClass
     public static void setup() {
         app = new App();
-        app.connect();
+        app.connect("localhost:33060");
+    }
+
+    @Test
+    public void testIfWorldQueriesGetDescendingReturnsCountries() {
+        List<Country> query = app.getWorldCountriesDescending();
+        long actualPopulation = query.get(0).getPopulation();
+        long expectedPopulation = 1277558000;
+
+        assertEquals(expectedPopulation, actualPopulation);
     }
 
     @Test
     public void testIfWorldQueriesGetAscendingReturnsCountries() {
         List<Country> query = app.getWorldCountriesAscending();
-        int actualPopulation = query.get(0).getPopulation();
-        int expectedPopulation = 1277558000;
+        long actualPopulation = query.get(0).getPopulation();
+        long expectedPopulation = 0;
 
-        assertEquals(actualPopulation, expectedPopulation);
+        assertEquals(expectedPopulation, actualPopulation);
     }
 
     @AfterClass
