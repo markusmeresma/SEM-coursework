@@ -10,21 +10,24 @@ public class App {
     private static final String DB_URL = "jdbc:mysql://db:3306/world?useSSL=false";
     private static final String DB_PASSWORD = "semcoursework";
 
+    private DBDriverMysql dbDriver;
+
     public static void main(String[] args) {
-        DBDriverMysql db = new DBDriverMysql(DB_URL, DB_PASSWORD);
 
-        db.connect();
+    }
 
-        WorldQueries continentQueries = new WorldQueries(db.getConn());
+    public List<Country> getWorldCountriesAscending() {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getPopulationAscending();
+    }
 
-        List<Country> countriesDesc = continentQueries.getPopulationDescending();
-        List<Country> countriesAsc = continentQueries.getPopulationAscending();
+    public void connect() {
+        dbDriver = new DBDriverMysql(DB_URL, DB_PASSWORD);
+        dbDriver.connect();
+    }
 
-        for(int i = 0; i < countriesAsc.size(); i++) {
-            System.out.println(countriesAsc.get(i));
-            System.out.println(countriesDesc.get(i));
-        }
-        db.disconnect();
+    public void disconnect() {
+        dbDriver.disconnect();
     }
 
 }

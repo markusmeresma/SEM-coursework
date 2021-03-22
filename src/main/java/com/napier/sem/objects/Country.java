@@ -17,6 +17,10 @@ public class Country {
         this.population = population;
     }
 
+    public int getPopulation() {
+        return population;
+    }
+
     @Override
     public String toString() {
         return "Country{" +
