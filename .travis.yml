@@ -21,7 +21,6 @@ jobs:
       script: mvn -Dtest=com.napier.sem.WorldQueriesTest test
     - stage: integration tests
       jdk: oraclejdk11
-      install: true
       script: mvn -Dtest=com.napier.sem.AppIntegrationTest
     - stage: deploy
       install: skip
