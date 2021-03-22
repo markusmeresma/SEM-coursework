@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ContinentQueries {
+public class WorldQueries {
     private Connection conn;
 
-    public ContinentQueries(Connection conn) {
+    public WorldQueries(Connection conn) {
         this.conn = conn;
     }
 
     /**
-     * Gets population from highest to lowest.
+     * Gets world population from highest to lowest.
      *
      * @return List of countries
      */
@@ -25,7 +25,7 @@ public class ContinentQueries {
     }
 
     /**
-     * Gets population from lowest to highest.
+     * Gets world population from lowest to highest.
      *
      * @return sorted countries
      */
@@ -36,7 +36,7 @@ public class ContinentQueries {
     }
 
     /**
-     * Gets population from highest to lowest.
+     * Gets world population from highest to lowest.
      *
      * @return list of sorted countries sorted countries
      */
