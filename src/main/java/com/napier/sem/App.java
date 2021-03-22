@@ -2,9 +2,8 @@ package com.napier.sem;
 
 import com.napier.sem.driver.DBDriverMysql;
 import com.napier.sem.objects.Country;
-import com.napier.sem.queries.ContinentQueries;
+import com.napier.sem.queries.WorldQueries;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class App {
@@ -16,12 +15,14 @@ public class App {
 
         db.connect();
 
-        ContinentQueries continentQueries = new ContinentQueries(db.getConn());
+        WorldQueries continentQueries = new WorldQueries(db.getConn());
 
-        List<Country> countries = continentQueries.getPopulationDescending();
+        List<Country> countriesDesc = continentQueries.getPopulationDescending();
+        List<Country> countriesAsc = continentQueries.getPopulationAscending();
 
-        for (var country : countries) {
-            System.out.println(country.toString());
+        for(int i = 0; i < countriesAsc.size(); i++) {
+            System.out.println(countriesAsc.get(i));
+            System.out.println(countriesDesc.get(i));
         }
         db.disconnect();
     }
