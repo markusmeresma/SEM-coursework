@@ -10,7 +10,7 @@ install:
   - docker run --rm -d -e MYSQL_ROOT_PASSWORD=semcoursework -p 33060:3306 database
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-before_script:
+before_install:
   - mvn clean
 
 jobs:
@@ -21,6 +21,7 @@ jobs:
       script: mvn -Dtest=com.napier.sem.WorldQueriesTest test
     - stage: integration tests
       jdk: oraclejdk11
+      install: true
       script: mvn -Dtest=com.napier.sem.AppIntegrationTest
     - stage: deploy
       install: skip
