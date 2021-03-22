@@ -27,5 +27,11 @@ jobs:
       jdk: oraclejdk11
       script: echo "Dummy deploy"
 
+stages:
+  - unit tests
+  - integration tests
+  - name: deploy
+    if: branch = master
+
 after_success:
   - docker compose up --abort-on-container-exit
