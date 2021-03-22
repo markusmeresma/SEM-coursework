@@ -12,11 +12,11 @@ import static org.junit.Assert.assertEquals;
 
 public class AppIntegrationTest {
 
-    private App app;
+    private static App app;
 
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
         app = new App();
         app.connect();
     }
@@ -31,7 +31,7 @@ public class AppIntegrationTest {
     }
 
     @AfterClass
-    public void close() {
+    public static void close() {
         app.disconnect();
     }
 }
