@@ -4,7 +4,7 @@ import com.napier.sem.objects.Country;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ContinentQueries {
@@ -17,10 +17,30 @@ public class ContinentQueries {
     /**
      * Gets population from highest to lowest.
      *
-     * @return sorted countries
+     * @return List of countries
      */
     public List<Country> getPopulationDescending() {
         // select name from country order by population desc;
+        return getCountriesSortedDescending();
+    }
+
+    /**
+     * Gets population from lowest to highest.
+     *
+     * @return sorted countries
+     */
+    public List<Country> getPopulationAscending() {
+        List<Country> result = getCountriesSortedDescending();
+        Collections.reverse(result);
+        return result;
+    }
+
+    /**
+     * Gets population from highest to lowest.
+     *
+     * @return list of sorted countries sorted countries
+     */
+    private List<Country> getCountriesSortedDescending() {
         List<Country> result = new ArrayList<>();
         try (Statement statement = conn.createStatement()) {
             statement.executeQuery("use world;");
