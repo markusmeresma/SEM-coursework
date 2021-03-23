@@ -5,6 +5,7 @@ import com.napier.sem.objects.Country;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class WorldQueries {
@@ -36,7 +37,7 @@ public class WorldQueries {
     }
 
     /**
-     * Gets world population from highest to lowest.
+     * Helper method that gets world population from highest to lowest.
      *
      * @return list of sorted countries sorted countries
      */

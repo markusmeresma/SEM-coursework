@@ -76,7 +76,6 @@ public class DBDriverMysql {
         {
             try
             {
-                // Close connection
                 conn.close();
             }
             catch (Exception e)
