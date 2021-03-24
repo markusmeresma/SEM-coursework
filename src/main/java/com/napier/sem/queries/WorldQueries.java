@@ -136,7 +136,7 @@ public class WorldQueries {
      */
     public List<Country> getCountryInRegionPopDescending(String Region) {
         // select name from country order by population desc;
-        return getContinentPopulation(Region);
+        return getCountryInRegionPop(Region);
     }
 
     /**
@@ -145,7 +145,7 @@ public class WorldQueries {
      * @return sorted countries
      */
     public List<Country> getCountryInRegionPopAscending(String Region) {
-        List<Country> result = getContinentPopulationDescending(Region);
+        List<Country> result = getCountryInRegionPopDescending(Region);
         Collections.reverse(result);
         return result;
     }

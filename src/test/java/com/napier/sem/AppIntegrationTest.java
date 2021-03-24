@@ -50,7 +50,7 @@ public class AppIntegrationTest {
 
     @Test
     public void testIfWorldQueriesGetDescendingReturnsRegion() {
-        List<Country> query = app.getContinentCountriesDescending("Eastern Asia");
+        List<Country> query = app.getCountryInRegionPopDescending("Eastern Asia");
         String actualResult = query.get(0).getName();
         String expectedResult = "China";
 
