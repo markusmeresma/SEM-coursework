@@ -28,6 +28,16 @@ public class App {
         return continentQueries.getPopulationDescending();
     }
 
+    public List<Country> getContinentCountriesDescending(String Continent) {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getContinentPopulationDescending(Continent);
+    }
+
+    public List<Country> getContinentCountriesAscending(String Continent) {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getContinentPopulationAscending(Continent);
+    }
+
     public void connect(String location) {
         String url = DB_URL_PREFIX + location + DB_URL_POSTFIX;
         dbDriver = new DBDriverMysql(url, DB_PASSWORD);
