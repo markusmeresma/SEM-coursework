@@ -42,7 +42,7 @@ public class AppIntegrationTest {
     public void testIfWorldQueriesGetDescendingReturnsContinents() {
         List<Country> query = app.getContinentCountriesDescending("Africa");
         String actualContinent = query.get(0).getName();
-        String expectedContinent = "'Nigeria'";
+        String expectedContinent = "Nigeria";
 
         assertEquals(expectedContinent, actualContinent);
 
