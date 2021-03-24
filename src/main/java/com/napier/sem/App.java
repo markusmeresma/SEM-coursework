@@ -1,30 +1,51 @@
 package com.napier.sem;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
+import com.napier.sem.driver.DBDriverMysql;
+import com.napier.sem.objects.Country;
+import com.napier.sem.queries.WorldQueries;
 
-public class App
-{
-    /**
-     * Connects to mongoDB, creates document, stores and retrieves document in the database.
-     * @param args
-     */
-    public static void main(String[] args)
-    {
-        MongoClient mongoClient = new MongoClient("mongo-dbserver");
-        MongoDatabase database = mongoClient.getDatabase("mydb");
-        MongoCollection<Document> collection = database.getCollection("test");
+import java.util.List;
 
-        Document doc = new Document("name", "Kevin Sim")
-                .append("class", "Software Engineering Methods")
-                .append("year", "2021")
-                .append("result", new Document("CW", 95).append("EX", 85));
+public class App {
 
-        collection.insertOne(doc);
+    private static final String DB_URL_PREFIX = "jdbc:mysql://";
+    private static final String DB_URL_POSTFIX = "/world?allowPublicKeyRetrieval=true&useSSL=false";
+    private static final String DB_PASSWORD = "semcoursework";
 
-        Document myDoc = collection.find().first();
-        System.out.println(myDoc.toJson());
+    private DBDriverMysql dbDriver;
+
+    public static void main(String[] args) {
+
     }
+
+    public List<Country> getWorldCountriesAscending() {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getPopulationAscending();
+    }
+    
+    public List<Country> getWorldCountriesDescending() {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getPopulationDescending();
+    }
+
+    public List<Country> getContinentCountriesDescending(String Continent) {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getContinentPopulationDescending(Continent);
+    }
+
+    public List<Country> getContinentCountriesAscending(String Continent) {
+        WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
+        return continentQueries.getContinentPopulationAscending(Continent);
+    }
+
+    public void connect(String location) {
+        String url = DB_URL_PREFIX + location + DB_URL_POSTFIX;
+        dbDriver = new DBDriverMysql(url, DB_PASSWORD);
+        dbDriver.connect();
+    }
+
+    public void disconnect() {
+        dbDriver.disconnect();
+    }
+
 }
