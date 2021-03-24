@@ -102,7 +102,7 @@ public class WorldQueries {
         try (Statement statement = conn.createStatement()) {
             statement.executeQuery("use world;");
 
-            String query = "SELECT continent " +
+            String query = "SELECT * " +
                     "FROM country " +
                     "WHERE continent LIKE ? "+
                     "ORDER BY population " +
