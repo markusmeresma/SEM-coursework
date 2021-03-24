@@ -128,4 +128,62 @@ public class WorldQueries {
 
         return result;
     }
+
+    /**
+     * Gets world population from highest to lowest.
+     *
+     * @return List of countries
+     */
+    public List<Country> getCountryInRegionPopDescending(String Region) {
+        // select name from country order by population desc;
+        return getContinentPopulation(Region);
+    }
+
+    /**
+     * Gets world population from lowest to highest.
+     *
+     * @return sorted countries
+     */
+    public List<Country> getCountryInRegionPopAscending(String Region) {
+        List<Country> result = getContinentPopulationDescending(Region);
+        Collections.reverse(result);
+        return result;
+    }
+
+    /**
+     * Helper method that gets world population from highest to lowest.
+     *
+     * @return list of sorted countries sorted countries
+     */
+    private List<Country> getCountryInRegionPop(String Region) {
+        List<Country> result = new ArrayList<>();
+        try (Statement statement = conn.createStatement()) {
+            statement.executeQuery("use world;");
+
+            String query = "SELECT * " +
+                    "FROM country " +
+                    "WHERE region LIKE ? "+
+                    "ORDER BY population " +
+                    "DESC;";
+
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, Region);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String countryName = resultSet.getString("name");
+                String continent = resultSet.getString("continent");
+                String region = resultSet.getString("region");
+                int population = resultSet.getInt("population");
+
+                result.add(new Country(countryName, continent, region, population));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return result;
+    }
 }

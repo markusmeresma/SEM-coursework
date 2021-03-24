@@ -48,6 +48,16 @@ public class AppIntegrationTest {
 
     }
 
+    @Test
+    public void testIfWorldQueriesGetDescendingReturnsRegion() {
+        List<Country> query = app.getContinentCountriesDescending("Eastern Asia");
+        String actualResult = query.get(0).getName();
+        String expectedResult = "China";
+
+        assertEquals(expectedResult, actualResult);
+
+    }
+
     @AfterClass
     public static void close() {
         app.disconnect();
