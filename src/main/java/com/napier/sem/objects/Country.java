@@ -20,7 +20,6 @@ public class Country {
     public int getPopulation() {
         return population;
     }
-    public String getName() { return name; }
 
     @Override
     public String toString() {
