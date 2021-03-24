@@ -78,7 +78,7 @@ public class WorldQueries {
      */
     public List<Country> getContinentPopulationDescending(String Continent) {
         // select name from country order by population desc;
-        return getContinentPopulationDescending(Continent);
+        return getContinentPopulation(Continent);
     }
 
     /**
