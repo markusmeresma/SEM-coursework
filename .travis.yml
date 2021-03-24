@@ -5,9 +5,33 @@ language: java
 services:
   - docker
 
+install:
+  - docker build -t database db/.
+  - docker run --rm -d -e MYSQL_ROOT_PASSWORD=semcoursework -p 33060:3306 database
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+before_install:
+  - mvn clean
+
+jobs:
+  include:
+    - stage: unit tests
+      install: skip
+      jdk: oraclejdk11
+      script: mvn -Dtest=com.napier.sem.WorldQueriesTest test
+    - stage: integration tests
+      jdk: oraclejdk11
+      script: mvn -Dtest=com.napier.sem.AppIntegrationTest test
+    - stage: deploy
+      install: skip
+      jdk: oraclejdk11
+      script: echo "Dummy deploy"
+
+stages:
+  - unit tests
+  - integration tests
+  - name: deploy
+    if: branch = master
+
 after_success:
-  - docker network create --driver bridge se-methods
-  - docker pull mongo
-  - docker run -d --name mongo-dbserver --network se-methods mongo
-  - docker build -t se_methods .
-  - docker run --network se-methods se_methods
+  - docker compose up --abort-on-container-exit
