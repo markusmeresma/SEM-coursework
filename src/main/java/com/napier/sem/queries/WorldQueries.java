@@ -104,7 +104,7 @@ public class WorldQueries {
 
             String query = "SELECT continent " +
                     "FROM country " +
-                    "WHERE continent LIKE ?"+
+                    "WHERE continent LIKE ? "+
                     "ORDER BY population " +
                     "DESC;";
 
