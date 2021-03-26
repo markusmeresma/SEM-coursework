@@ -186,4 +186,23 @@ public class WorldQueries {
 
         return result;
     }
+
+    private int getTotalWorldPopulation() {
+        int result = 0;
+        try (Statement statement = conn.createStatement()) {
+            statement.executeQuery("use world");
+
+            String query = "SELECT SUM(population) AS Population;";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.first();
+            result = resultSet.getInt("Population");
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return result;
+    }
 }
