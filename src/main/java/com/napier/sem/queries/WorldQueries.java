@@ -187,6 +187,20 @@ public class WorldQueries {
         return result;
     }
 
+    /**
+     * Gets world population total.
+     *
+     * @return int of population
+     */
+    public int getWorldPopulation() {
+        return getTotalWorldPopulation();
+    }
+
+    /**
+     * Private method that gets world population.
+     *
+     * @return int of the population
+     */
     private int getTotalWorldPopulation() {
         int result = 0;
         try (Statement statement = conn.createStatement()) {

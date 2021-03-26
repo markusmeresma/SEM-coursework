@@ -42,6 +42,11 @@ public class App {
         WorldQueries continentQueries = new WorldQueries(dbDriver.getConn());
         return continentQueries.getCountryInRegionPopDescending(Region);
     }
+    
+    public int getWorldPopulation() {
+        WorldQueries populationQuery =  new WorldQueries((dbDriver.getConn()));
+        return populationQuery.getWorldPopulation();
+    }
 
     public void connect(String location) {
         String url = DB_URL_PREFIX + location + DB_URL_POSTFIX;
