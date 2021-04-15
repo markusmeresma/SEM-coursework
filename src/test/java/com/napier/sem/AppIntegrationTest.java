@@ -9,10 +9,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+//TODO : I think we should test the connection here only
 public class AppIntegrationTest {
 
     private static App app;
-
 
     @BeforeClass
     public static void setup() {
