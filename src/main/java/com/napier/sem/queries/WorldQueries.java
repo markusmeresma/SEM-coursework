@@ -17,7 +17,6 @@ public class WorldQueries {
 
     /**
      * Gets world population from highest to lowest.
-     *
      * @return List of countries
      */
     public List<Country> getPopulationDescending() {
@@ -27,7 +26,6 @@ public class WorldQueries {
 
     /**
      * Gets world population from lowest to highest.
-     *
      * @return sorted countries
      */
     public List<Country> getPopulationAscending() {
@@ -73,7 +71,6 @@ public class WorldQueries {
 
     /**
      * Gets world population from highest to lowest.
-     *
      * @return List of countries
      */
     public List<Country> getContinentPopulationDescending(String Continent) {
@@ -83,8 +80,7 @@ public class WorldQueries {
 
     /**
      * Gets world population from lowest to highest.
-     *
-     * @return sorted countries
+     * @return list of sorted countries
      */
     public List<Country> getContinentPopulationAscending(String Continent) {
         List<Country> result = getContinentPopulationDescending(Continent);

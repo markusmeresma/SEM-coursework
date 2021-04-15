@@ -2,7 +2,8 @@ package com.napier.sem.queries;
 
 import com.napier.sem.objects.Country;
 
-import java.sql.Connection;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,17 +16,18 @@ public class RegionQueries {
 
     /**
      * Gets region population sorted in ascending order.
-     * @return
+     * @return list of countries
      */
-    public List<Country> getRegionPopulationAscending(String region){
+    public List<Country> getRegionPopulationAscending(String region) {
         return getRegionPopulation(region);
     }
 
+
     /**
      * Gets region population sorted in descending order.
-     * @return
+     * @return list of countries
      */
-    public List<Country> getRegionPopulationDescending(String region){
+    public List<Country> getRegionPopulationDescending(String region) {
         List<Country> result = getRegionPopulation(region);
         Collections.reverse(result);
         return result;
@@ -33,13 +35,41 @@ public class RegionQueries {
 
     /**
      * Gets region population sorted in ascending order.
+     *
      * @param region
      * @return
      */
     private List<Country> getRegionPopulation(String region) {
-        throw new UnsupportedOperationException(); // will implement later
+        if (region == null) {
+            throw new IllegalArgumentException("You cannot pass null value as a region.");
+        }
+
+        List<Country> result = new ArrayList<>();
+        try (Statement statement = conn.createStatement()) {
+            statement.executeQuery("use world;");
+
+            String query = "SELECT * " +
+                    "FROM country " +
+                    "WHERE region = ?" +
+                    "ORDER BY population " +
+                    "ASC;";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, region);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String countryName = resultSet.getString("name");
+                String continent = resultSet.getString("continent");
+                int population = resultSet.getInt("population");
+
+                result.add(new Country(countryName, continent, region, population));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return result;
     }
-
-
-    // getRegionPopulation
 }
