@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class AppIntegrationTest {
 
@@ -56,6 +57,14 @@ public class AppIntegrationTest {
 
         assertEquals(expectedResult, actualResult);
 
+    }
+
+    @Test
+    public void testForWorldPopulation() {
+        long query = app.getWorldPopulation();
+        long expected_result = 0;
+
+        assertNotEquals(expected_result, query);
     }
 
     @AfterClass
