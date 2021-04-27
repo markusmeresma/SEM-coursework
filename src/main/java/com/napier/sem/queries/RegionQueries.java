@@ -1,6 +1,7 @@
 package com.napier.sem.queries;
 
 import com.napier.sem.objects.Country;
+import com.napier.sem.objects.Region;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -89,5 +90,39 @@ public class RegionQueries {
         }
 
         return result;
+    }
+
+    public Region getTotalPopulationOfRegion(String name)
+    {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Region is null or empty");
+        } else {
+            try {
+                Statement stmt = conn.createStatement();
+                String query =
+                        "SELECT region, SUM(population) as population "
+                        + "FROM country "
+                        + "WHERE region LIKE ? "
+                        + "GROUP BY region";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, name);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    Region region = new Region();
+                    region.setName(resultSet.getString("region"));
+                    region.setPopulation(resultSet.getLong("population"));
+                    return region;
+                } else {
+                    throw new Exception("Region not found");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get region population");
+            }
+            return null;
+        }
     }
 }
