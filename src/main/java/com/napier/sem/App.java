@@ -2,8 +2,10 @@ package com.napier.sem;
 
 import com.napier.sem.driver.DBDriverMysql;
 import com.napier.sem.objects.City;
+import com.napier.sem.objects.Continent;
 import com.napier.sem.objects.Country;
 import com.napier.sem.queries.CityQueries;
+import com.napier.sem.queries.ContinentQueries;
 import com.napier.sem.queries.RegionQueries;
 import com.napier.sem.queries.WorldQueries;
 
@@ -128,6 +130,16 @@ public class App {
     public List<Country> getCountryPopulation(String country) {
         WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
         return worldQueries.getCountryPopulation(country);
+    }
+
+    /**
+     * Gets population of a continent
+     * @param continent
+     * @return
+     */
+    public Continent getContinentPopulation(String continent) {
+        ContinentQueries continentQueries = new ContinentQueries(dbDriver.getConn());
+        return continentQueries.getContinentPopulation(continent);
     }
 
     public void connect(String location) {
