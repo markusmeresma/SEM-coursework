@@ -15,7 +15,24 @@ public class RegionQueries {
     }
 
     /**
+     * Gets top N populated countries in a region provided by the user.
+     * @param region
+     * @param number
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInRegion(String region, int number) {
+        List<Country> result = getRegionPopulationDescending(region);
+
+        if(number >= result.size()) {
+            throw new IllegalArgumentException("The provided number is invalid. The number of countries in that region is " + result.size());
+        }
+
+        return result.subList(0, number);
+    }
+
+    /**
      * Gets region population sorted in ascending order.
+     *
      * @return list of countries
      */
     public List<Country> getRegionPopulationAscending(String region) {
@@ -25,6 +42,7 @@ public class RegionQueries {
 
     /**
      * Gets region population sorted in descending order.
+     *
      * @return list of countries
      */
     public List<Country> getRegionPopulationDescending(String region) {

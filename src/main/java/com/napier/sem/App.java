@@ -20,6 +20,40 @@ public class App {
     }
 
     /**
+     * Gets top N populated countries in a continent provided by the user.
+     * @param continent
+     * @param number
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInAContinent(String continent, int number) {
+        WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
+        return worldQueries.getTopNPopulatedCountriesInAContinent(continent, number);
+    }
+
+    /**
+     * Gets top N populated countries in the world provided by the user.
+     * @param number
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInTheWorld(int number) {
+        WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
+        return worldQueries.getTopNPopulatedCountriesInTheWorld(number);
+    }
+
+
+
+    /**
+     * Gets top N populated countries in a region provided by the user
+     *
+     * @param
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInRegion(String region, int number) {
+        RegionQueries regionQueries = new RegionQueries(dbDriver.getConn());
+        return regionQueries.getTopNPopulatedCountriesInRegion(region, number);
+    }
+
+    /**
      * Gets region population sorted in ascending order.
      * @return list of countries
      */

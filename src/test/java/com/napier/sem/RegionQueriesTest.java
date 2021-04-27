@@ -20,6 +20,27 @@ public class RegionQueriesTest {
         app.connect("localhost:33060");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testgetTopNPopulatedCountriesInRegionIfNIsGreaterThanTheNumberOfCountries() {
+        app.getTopNPopulatedCountriesInRegion("Eastern Africa", 1000);
+    }
+
+    @Test
+    public void testGetTopNPopulatedCountriesInRegionIfNReturnsCorrectCountries() {
+        int expected = 10;
+
+        List<Country> query = app.getTopNPopulatedCountriesInRegion("Eastern Africa", expected);
+
+        int actual = query.size();
+
+        int actualCountryPopulation = query.get(0).getPopulation();
+        int expectedCountryPopulation = 62565000;
+
+
+        assertEquals("The result size must be 10.", expected, actual);
+        assertEquals(expectedCountryPopulation, actualCountryPopulation);
+    }
+
     @Test
     public void testIfRegionQueriesReturnsCountriesInAscendingOrder() {
         List<Country> query = app.getRegionCountriesAscending("Eastern Africa");
@@ -29,7 +50,7 @@ public class RegionQueriesTest {
         int expected = 0;
         int actual = country.getPopulation();
 
-        String expectedName =  "British Indian Ocean Territory";
+        String expectedName = "British Indian Ocean Territory";
         String actualName = country.getName();
 
         assertEquals("The smallest country should have 0 population.", expected, actual);
@@ -45,7 +66,7 @@ public class RegionQueriesTest {
         int expected = 62565000;
         int actual = country.getPopulation();
 
-        String expectedName =  "Ethiopia";
+        String expectedName = "Ethiopia";
         String actualName = country.getName();
 
         assertEquals("The biggest country should have 62565000 population.", expected, actual);
