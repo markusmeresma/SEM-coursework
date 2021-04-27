@@ -120,6 +120,16 @@ public class App {
         return cityQueries.getCityPopulation(city);
     }
 
+    /**
+     * Gets a population of a country
+     * @param country
+     * @return
+     */
+    public List<Country> getCountryPopulation(String country) {
+        WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
+        return worldQueries.getCountryPopulation(country);
+    }
+
     public void connect(String location) {
         String url = DB_URL_PREFIX + location + DB_URL_POSTFIX;
         dbDriver = new DBDriverMysql(url, DB_PASSWORD);

@@ -2,6 +2,7 @@ package com.napier.sem.queries;
 
 import com.napier.sem.objects.Country;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,5 +158,49 @@ public class WorldQueries {
         }
 
         return result;
+    }
+
+    /**
+     * Method to get a population of a country
+     * @param name
+     * @return
+     */
+    public List<Country> getCountryPopulation(String name)
+    {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Country name is null or empty");
+        }
+        else {
+            try {
+                Statement stmt = conn.createStatement();
+                String query =
+                        "SELECT country.Name, country.Population "
+                                + "FROM country "
+                                + "WHERE country.Name LIKE ? ";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, name);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<Country> result = new ArrayList<>();
+
+                while(resultSet.next()) {
+                    Country country = new Country(
+                            resultSet.getString("name"),
+                            resultSet.getString("continent"),
+                            resultSet.getString("region"),
+                            resultSet.getInt("population")
+                    );
+                    result.add(country);
+                }
+                return result;
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get country population");
+            }
+            return null;
+        }
     }
 }

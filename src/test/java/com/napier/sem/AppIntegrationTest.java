@@ -58,6 +58,15 @@ public class AppIntegrationTest {
         assertEquals(expectedPopulation, actualPopulation);
     }
 
+    @Test
+    public void testGetCountryPopulation() {
+        List<Country> query = app.getCountryPopulation("Estonia");
+        int actualPopulation = query.get(0).getPopulation();
+        int expectedPopulation = 1439200;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
     @AfterClass
     public static void close() {
         app.disconnect();
