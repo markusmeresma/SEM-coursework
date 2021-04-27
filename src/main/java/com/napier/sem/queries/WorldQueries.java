@@ -186,12 +186,9 @@ public class WorldQueries {
                 List<Country> result = new ArrayList<>();
 
                 while(resultSet.next()) {
-                    Country country = new Country(
-                            resultSet.getString("name"),
-                            resultSet.getString("continent"),
-                            resultSet.getString("region"),
-                            resultSet.getInt("population")
-                    );
+                    Country country = new Country();
+                    country.setName(resultSet.getString("country.Name"));
+                    country.setPopulation(resultSet.getInt("country.Population"));
                     result.add(country);
                 }
                 return result;

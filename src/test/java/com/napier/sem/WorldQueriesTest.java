@@ -61,6 +61,16 @@ public class WorldQueriesTest {
         assertEquals(expectedCountryPopulation, actualCountryPopulation);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getCountryPopulationTestEmpty() {
+        List<Country> query = app.getCountryPopulation("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getCountryPopulationTestNull() {
+        List<Country> query = app.getCountryPopulation(null);
+    }
+
 
     @AfterClass
     public static void close() {
