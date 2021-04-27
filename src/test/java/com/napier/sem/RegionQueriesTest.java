@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import com.napier.sem.objects.Country;
+import com.napier.sem.objects.Region;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -82,6 +83,16 @@ public class RegionQueriesTest {
     @Test(expected = IllegalArgumentException.class)
     public void testIfRegionQueriesReturnEmptyListIfRegionStringIsNull() {
         app.getRegionCountriesAscending(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getRegionPopulationEmpty() {
+        Region query = app.getRegionPopulation("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getRegionPopulationNull() {
+        Region query = app.getRegionPopulation(null);
     }
 
     @AfterClass

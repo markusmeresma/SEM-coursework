@@ -4,6 +4,7 @@ import com.napier.sem.driver.DBDriverMysql;
 import com.napier.sem.objects.City;
 import com.napier.sem.objects.Continent;
 import com.napier.sem.objects.Country;
+import com.napier.sem.objects.Region;
 import com.napier.sem.queries.CityQueries;
 import com.napier.sem.queries.ContinentQueries;
 import com.napier.sem.queries.RegionQueries;
@@ -140,6 +141,11 @@ public class App {
     public Continent getContinentPopulation(String continent) {
         ContinentQueries continentQueries = new ContinentQueries(dbDriver.getConn());
         return continentQueries.getContinentPopulation(continent);
+    }
+
+    public Region getRegionPopulation(String region) {
+        RegionQueries regionQueries = new RegionQueries(dbDriver.getConn());
+        return regionQueries.getTotalPopulationOfRegion(region);
     }
 
     public void connect(String location) {
