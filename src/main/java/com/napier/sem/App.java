@@ -19,6 +19,19 @@ public class App {
 
     }
 
+
+    /**
+     * Gets top N populated countries in a region provided by the user
+     *
+     * @param
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInRegion(String region, int number) {
+        RegionQueries regionQueries = new RegionQueries(dbDriver.getConn());
+        List<Country> result = regionQueries.getTopNPopulatedCountriesInRegion(region, number);
+        return result;
+    }
+
     /**
      * Gets region population sorted in ascending order.
      * @return list of countries
