@@ -20,7 +20,6 @@ public class WorldQueriesTest {
         app.connect("localhost:33060");
     }
 
-
     @Test(expected = IllegalArgumentException.class)
     public void testGetTopNPopulatedCountriesInAContinentIfNIsGreaterThanTheNumberOfCountries() {
         app.getTopNPopulatedCountriesInAContinent("Asia", 1000);
