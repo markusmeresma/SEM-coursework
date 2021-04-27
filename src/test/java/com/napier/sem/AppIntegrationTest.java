@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import com.napier.sem.objects.City;
 import com.napier.sem.objects.Country;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -46,6 +47,15 @@ public class AppIntegrationTest {
 
         assertEquals(expectedContinent, actualContinent);
 
+    }
+
+    @Test
+    public void testGetCityPopulation() {
+        List<City> query = app.getCityPopulation("Tallinn");
+        int actualPopulation = query.get(0).getPopulation();
+        int expectedPopulation = 403981;
+
+        assertEquals(expectedPopulation, actualPopulation);
     }
 
     @AfterClass
