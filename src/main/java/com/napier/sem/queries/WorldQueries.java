@@ -16,6 +16,40 @@ public class WorldQueries {
     }
 
     /**
+     * Gets top N populated countries in a continent provided by the user.
+     * @param continent
+     * @param number
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInAContinent(String continent, int number) {
+        List<Country> result = getContinentPopulation(continent);
+
+        if(number >= result.size()) {
+            throw new IllegalArgumentException("The provided number is invalid. The number of countries in the world is " + result.size());
+        }
+
+        return result.subList(0, number);
+    }
+
+
+
+    /**
+     * Gets top N populated countries in the world provided by the user.
+     * @param number
+     * @return list of countries
+     */
+    public List<Country> getTopNPopulatedCountriesInTheWorld(int number) {
+        List<Country> result = getCountriesSortedDescending();
+
+        if(number >= result.size()) {
+            throw new IllegalArgumentException("The provided number is invalid. The number of countries in the world is " + result.size());
+        }
+
+        return result.subList(0, number);
+    }
+
+
+    /**
      * Gets world population from highest to lowest.
      * @return List of countries
      */

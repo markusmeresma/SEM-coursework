@@ -15,13 +15,13 @@ public class RegionQueries {
     }
 
     /**
-     * Gets top N populated countries in a region provided by the user
-     *
-     * @param
+     * Gets top N populated countries in a region provided by the user.
+     * @param region
+     * @param number
      * @return list of countries
      */
     public List<Country> getTopNPopulatedCountriesInRegion(String region, int number) {
-        List<Country> result = getRegionPopulation(region);
+        List<Country> result = getRegionPopulationDescending(region);
 
         if(number >= result.size()) {
             throw new IllegalArgumentException("The provided number is invalid. The number of countries in that region is " + result.size());

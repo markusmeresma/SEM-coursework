@@ -26,14 +26,19 @@ public class RegionQueriesTest {
     }
 
     @Test
-    public void testgetTopNPopulatedCountriesInRegionIfNReturnsCorrentNumberOfCountries() {
+    public void testGetTopNPopulatedCountriesInRegionIfNReturnsCorrectCountries() {
         int expected = 10;
 
         List<Country> query = app.getTopNPopulatedCountriesInRegion("Eastern Africa", expected);
 
         int actual = query.size();
 
+        int actualCountryPopulation = query.get(0).getPopulation();
+        int expectedCountryPopulation = 62565000;
+
+
         assertEquals("The result size must be 10.", expected, actual);
+        assertEquals(expectedCountryPopulation, actualCountryPopulation);
     }
 
     @Test
