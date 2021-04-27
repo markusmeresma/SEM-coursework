@@ -17,7 +17,7 @@ jobs:
   include:
     - stage: unit tests
       jdk: oraclejdk11
-      script: mvn -Dtest=com.napier.sem.WorldQueriesTest, com.napier.sem.RegionQueriesTest test
+      script: mvn -Dtest=WorldQueriesTest, RegionQueriesTest test
 
     - stage: integration tests
       jdk: oraclejdk11
