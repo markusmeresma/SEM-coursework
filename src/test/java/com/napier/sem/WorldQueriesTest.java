@@ -10,8 +10,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-// Breaks the build on the CI server - works locally by removing the @Ignore annotation
-@Ignore
 public class WorldQueriesTest {
 
     private static App app;
