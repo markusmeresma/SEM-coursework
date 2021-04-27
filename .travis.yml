@@ -1,9 +1,13 @@
-sudo: required
-
 language: java
 
+sudo: required
+addons:
+  hosts:
+    -db
 services:
   - docker
+
+
 
 install:
   - docker build -t database db/.
@@ -22,10 +26,31 @@ jobs:
     - stage: integration tests
       jdk: oraclejdk11
       script: mvn -Dtest=com.napier.sem.AppIntegrationTest test
-    - stage: deploy
+    - stage: Github Release
+      #we do not want to install
       install: skip
+      #build the JAR
       jdk: oraclejdk11
-      script: echo "Dummy deploy"
+      script:
+        - echo "Deploying to Github Releases"
+        #Package (build) the JAR
+        - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
+
+      before_deploy:
+        #set up git username and tag commit
+        - git config --local user.name "Mab Leslie"
+        - git config --local user.email "40429125@live.napier.ac.uk"
+        #Create temporary tag from date and Git log
+        - export TRAVIS_TAG${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
+        #set tag
+        - git tag $TRAVIS_TAG
+        deploy:
+          provider: releases
+            #thus us the token we set before
+            api_key: $GITHUB_OAUTH_TOKEN
+            #copy built JAR file to release. JAR built in $Travis_BUILD_DIR/target
+            file: $TRAVIS_BUILD_DIR/target/seCoursework.jar
+            skip_cleanup: true
 
 stages:
   - unit tests
@@ -35,3 +60,4 @@ stages:
 
 after_success:
   - docker compose up --abort-on-container-exit
+  - bash <(curl -s hyyps://codecov.io/bash)
