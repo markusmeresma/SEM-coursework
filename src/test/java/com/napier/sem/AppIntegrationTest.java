@@ -1,6 +1,6 @@
 package com.napier.sem;
 
-import com.napier.sem.objects.Country;
+import com.napier.sem.objects.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,10 +9,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+//TODO : I think we should test the connection here only
 public class AppIntegrationTest {
 
     private static App app;
-
 
     @BeforeClass
     public static void setup() {
@@ -46,6 +46,51 @@ public class AppIntegrationTest {
 
         assertEquals(expectedContinent, actualContinent);
 
+    }
+
+    @Test
+    public void testGetCityPopulation() {
+        List<City> query = app.getCityPopulation("Tallinn");
+        int actualPopulation = query.get(0).getPopulation();
+        int expectedPopulation = 403981;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
+    @Test
+    public void testGetCountryPopulation() {
+        List<Country> query = app.getCountryPopulation("Estonia");
+        int actualPopulation = query.get(0).getPopulation();
+        int expectedPopulation = 1439200;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
+    @Test
+    public void testGetContinentPopulation() {
+        Continent query = app.getContinentPopulation("Asia");
+        long actualPopulation = query.getPopulation();
+        long expectedPopulation = 3705025700L;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
+    @Test
+    public void testGetRegionPopulation() {
+        Region query = app.getRegionPopulation("Southern Europe");
+        long actualPopulation = query.getPopulation();
+        long expectedPopulation = 144674200L;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
+    @Test
+    public void testGetDistrictPopulation() {
+        District query = app.getDistrictPopulation("Auckland");
+        long actualPopulation = query.getPopulation();
+        long expectedPopulation = 1021900L;
+
+        assertEquals(expectedPopulation, actualPopulation);
     }
 
     @AfterClass
