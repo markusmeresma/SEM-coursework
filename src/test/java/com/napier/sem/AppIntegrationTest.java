@@ -1,9 +1,6 @@
 package com.napier.sem;
 
-import com.napier.sem.objects.City;
-import com.napier.sem.objects.Continent;
-import com.napier.sem.objects.Country;
-import com.napier.sem.objects.Region;
+import com.napier.sem.objects.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -83,6 +80,15 @@ public class AppIntegrationTest {
         Region query = app.getRegionPopulation("Southern Europe");
         long actualPopulation = query.getPopulation();
         long expectedPopulation = 144674200L;
+
+        assertEquals(expectedPopulation, actualPopulation);
+    }
+
+    @Test
+    public void testGetDistrictPopulation() {
+        District query = app.getDistrictPopulation("Auckland");
+        long actualPopulation = query.getPopulation();
+        long expectedPopulation = 1021900L;
 
         assertEquals(expectedPopulation, actualPopulation);
     }

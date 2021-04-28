@@ -1,14 +1,8 @@
 package com.napier.sem;
 
 import com.napier.sem.driver.DBDriverMysql;
-import com.napier.sem.objects.City;
-import com.napier.sem.objects.Continent;
-import com.napier.sem.objects.Country;
-import com.napier.sem.objects.Region;
-import com.napier.sem.queries.CityQueries;
-import com.napier.sem.queries.ContinentQueries;
-import com.napier.sem.queries.RegionQueries;
-import com.napier.sem.queries.WorldQueries;
+import com.napier.sem.objects.*;
+import com.napier.sem.queries.*;
 
 import java.util.List;
 
@@ -143,9 +137,19 @@ public class App {
         return continentQueries.getContinentPopulation(continent);
     }
 
+    /**
+     * Gets population of a region
+     * @param region
+     * @return
+     */
     public Region getRegionPopulation(String region) {
         RegionQueries regionQueries = new RegionQueries(dbDriver.getConn());
         return regionQueries.getTotalPopulationOfRegion(region);
+    }
+
+    public District getDistrictPopulation(String district) {
+        DistrictQueries districtQueries = new DistrictQueries(dbDriver.getConn());
+        return districtQueries.getPopulation(district);
     }
 
     public void connect(String location) {
