@@ -165,4 +165,56 @@ public class CityQueries {
         }
     }
 
+    /**
+     * Helper method to get top n populated cities in the world where N is provided by the user
+     * @return a list of cities
+     */
+    public List<City> getCitiesInTheWorld()
+    {
+        try {
+            Statement stmt = conn.createStatement();
+            String query =
+                    "SELECT city.ID, city.Name, country.Name, city.District, city.Population "
+                    + "FROM city JOIN country ON city.CountryCode = country.Code "
+                    + "ORDER BY city.Population DESC";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<City> cities = new ArrayList<City>();
+
+            while(resultSet.next()) {
+                City city = new City();
+                city.setID(resultSet.getInt("city.ID"));
+                city.setName(resultSet.getString("city.Name"));
+                city.setCountry(resultSet.getString("country.Name"));
+                city.setDistrict(resultSet.getString("city.District"));
+                city.setPopulation(resultSet.getInt("city.Population"));
+                cities.add(city);
+            }
+            return cities;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in the world");
+        }
+        return null;
+    }
+
+    /**
+     * Get top n populated cities in the world
+     * @param n
+     * @return a list of cities
+     */
+    public List<City> getTopNPopulatedCitiesInTheWorld(int n)
+    {
+        List<City> result = getCitiesInTheWorld();
+
+        if (n >= result.size()) {
+            throw new IllegalArgumentException("The provided number is invalid. The number of cities in the world is " + result.size());
+        }
+
+        return result.subList(0, n);
+    }
+
 }

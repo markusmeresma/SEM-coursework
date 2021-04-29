@@ -112,6 +112,15 @@ public class AppIntegrationTest {
         assertEquals(expectedSizeOfList, actualSizeOfList);
     }
 
+    @Test
+    public void testGetTopNPopulatedCitiesInTheWorld() {
+        List<City> query = app.getTopNPopulatedCitiesInTheWorld(10);
+        int actualSizeOfList = query.size();
+        int expectedSizeOfList = 10;
+
+        assertEquals(expectedSizeOfList, actualSizeOfList);
+    }
+
     @AfterClass
     public static void close() {
         app.disconnect();

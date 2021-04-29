@@ -182,6 +182,16 @@ public class App {
     }
 
     /**
+     * Gets top N populated cities in the world
+     * @param number
+     * @return a list of top populated citis in the world
+     */
+    public List<City> getTopNPopulatedCitiesInTheWorld(int number) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getTopNPopulatedCitiesInTheWorld(number);
+    }
+
+    /**
      * Connect to the DB
      * @param location
      */

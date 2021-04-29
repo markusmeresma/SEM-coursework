@@ -25,4 +25,9 @@ public class CityQueriesTest {
     public void getTopNPopulatedCitiesInAContinentDescendingNull() {
         List<City> query = app.getTopNPopulatedCitiesInAContinentDescending(null, 0);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getTopNPopulatedCitiesInTheWorld() {
+        List<City> query = app.getTopNPopulatedCitiesInTheWorld(5000);
+    }
 }
