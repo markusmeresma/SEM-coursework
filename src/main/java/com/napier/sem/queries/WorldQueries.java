@@ -205,7 +205,7 @@ public class WorldQueries {
      * Method to get a population of a country
      * @return int
      */
-    public int getWorldPopulation()
+    public long getWorldPopulation()
     {
         try {
                 Statement stmt = conn.createStatement();
@@ -219,7 +219,7 @@ public class WorldQueries {
 
                 int result = -1;
 
-                while(resultSet.next()) {
+                while(resultSet.first()) {
                     result = resultSet.getInt("SUM(country.Population)");
                 }
                 return result;

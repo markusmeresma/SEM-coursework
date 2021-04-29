@@ -165,7 +165,7 @@ public class App {
         return cityQueries.getCitiesInDistrictByLargestToSmallestPopulation(district);
     }
 
-    public int getWorldPopulation() {
+    public long getWorldPopulation() {
         WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
         return worldQueries.getWorldPopulation();
     }

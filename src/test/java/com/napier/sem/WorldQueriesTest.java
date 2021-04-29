@@ -74,10 +74,11 @@ public class WorldQueriesTest {
 
     @Test
     public void testWorldPopulation(){
-        int compare = 0;
-        int result = app.getWorldPopulation();
+        long compare;
+        compare = 6078749450L;
+        long result = app.getWorldPopulation();
 
-        assertNotEquals(compare, result);
+        assertEquals(compare, result);
     }
 
     @AfterClass
