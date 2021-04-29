@@ -165,6 +165,11 @@ public class App {
         return cityQueries.getCitiesInDistrictByLargestToSmallestPopulation(district);
     }
 
+    public long getWorldPopulation() {
+        WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
+        return worldQueries.getWorldPopulation();
+    }
+
     /**
      * Gets top N populated cities in a continent organised by largest to smallest population
      * @param continent

@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class WorldQueriesTest {
 
@@ -71,6 +72,14 @@ public class WorldQueriesTest {
         List<Country> query = app.getCountryPopulation(null);
     }
 
+    @Test
+    public void testWorldPopulation(){
+        long compare;
+        compare = 6078749450L;
+        long result = app.getWorldPopulation();
+
+        assertEquals(compare, result);
+    }
 
     @AfterClass
     public static void close() {
