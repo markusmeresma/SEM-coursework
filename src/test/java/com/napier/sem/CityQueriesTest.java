@@ -20,4 +20,9 @@ public class CityQueriesTest {
     public void getCitiesInDistrictByLargestToSmallestPopulationInvalidInput() {
         List<City> query = app.getCitiesInDistrictDescending(null);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getTopNPopulatedCitiesInAContinentDescendingNull() {
+        List<City> query = app.getTopNPopulatedCitiesInAContinentDescending(null, 0);
+    }
 }

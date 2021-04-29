@@ -146,7 +146,7 @@ public class App {
     }
 
     /**
-     *
+     * Gets a population of a district
      * @param district
      * @return the population of a district
      */
@@ -156,13 +156,24 @@ public class App {
     }
 
     /**
-     *
+     * Gets a population of cities in a district organised by largest to smallest
      * @param district
-     * @return a list of cities in district organised by population from largest to smallest
+     * @return a list of cities
      */
     public List<City> getCitiesInDistrictDescending(String district) {
         CityQueries cityQueries = new CityQueries(dbDriver.getConn());
         return cityQueries.getCitiesInDistrictByLargestToSmallestPopulation(district);
+    }
+
+    /**
+     * Gets top N populated cities in a continent organised by largest to smallest population
+     * @param continent
+     * @param num
+     * @return a list of N cities in a continent organised by largest to smallest
+     */
+    public List<City> getTopNPopulatedCitiesInAContinentDescending(String continent, int num) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getTopNPopulatedCitiesInAContinentDescending(continent, num);
     }
 
     /**

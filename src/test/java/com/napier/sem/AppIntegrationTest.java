@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 //TODO : I think we should test the connection here only
 public class AppIntegrationTest {
@@ -98,6 +99,15 @@ public class AppIntegrationTest {
         List<City> query = app.getCitiesInDistrictDescending("California");
         int actualSizeOfList = query.size();
         int expectedSizeOfList = 68;
+
+        assertEquals(expectedSizeOfList, actualSizeOfList);
+    }
+
+    @Test
+    public void testGetTopNPopulatedCitiesInAContinentDescending() {
+        List<City> query = app.getTopNPopulatedCitiesInAContinentDescending("Europe", 5);
+        int actualSizeOfList = query.size();
+        int expectedSizeOfList = 5;
 
         assertEquals(expectedSizeOfList, actualSizeOfList);
     }
