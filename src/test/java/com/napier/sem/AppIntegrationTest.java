@@ -93,6 +93,15 @@ public class AppIntegrationTest {
         assertEquals(expectedPopulation, actualPopulation);
     }
 
+    @Test
+    public void testGetCitiesInDistrictDescending() {
+        List<City> query = app.getCitiesInDistrictDescending("California");
+        int actualSizeOfList = query.size();
+        int expectedSizeOfList = 68;
+
+        assertEquals(expectedSizeOfList, actualSizeOfList);
+    }
+
     @AfterClass
     public static void close() {
         app.disconnect();

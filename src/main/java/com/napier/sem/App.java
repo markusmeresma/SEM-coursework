@@ -39,8 +39,6 @@ public class App {
         return worldQueries.getTopNPopulatedCountriesInTheWorld(number);
     }
 
-
-
     /**
      * Gets top N populated countries in a region provided by the user
      *
@@ -110,7 +108,7 @@ public class App {
     /**
      * Gets a population of a city
      * @param city
-     * @return a list of cities and their populations
+     * @return a list containing the specified city and its population (a list in case there are multiple cities with the same name e.g. Memphis, Egypt and Memphis, Tennessee)
      */
     public List<City> getCityPopulation(String city) {
         CityQueries cityQueries = new CityQueries(dbDriver.getConn());
@@ -120,7 +118,7 @@ public class App {
     /**
      * Gets a population of a country
      * @param country
-     * @return
+     * @return a list containing the specified country and its population (a list in case there are countries with the same name)
      */
     public List<Country> getCountryPopulation(String country) {
         WorldQueries worldQueries = new WorldQueries(dbDriver.getConn());
@@ -130,7 +128,7 @@ public class App {
     /**
      * Gets population of a continent
      * @param continent
-     * @return
+     * @return the population of a continent
      */
     public Continent getContinentPopulation(String continent) {
         ContinentQueries continentQueries = new ContinentQueries(dbDriver.getConn());
@@ -140,24 +138,46 @@ public class App {
     /**
      * Gets population of a region
      * @param region
-     * @return
+     * @return the population of a region
      */
     public Region getRegionPopulation(String region) {
         RegionQueries regionQueries = new RegionQueries(dbDriver.getConn());
         return regionQueries.getTotalPopulationOfRegion(region);
     }
 
+    /**
+     *
+     * @param district
+     * @return the population of a district
+     */
     public District getDistrictPopulation(String district) {
         DistrictQueries districtQueries = new DistrictQueries(dbDriver.getConn());
         return districtQueries.getPopulation(district);
     }
 
+    /**
+     *
+     * @param district
+     * @return a list of cities in district organised by population from largest to smallest
+     */
+    public List<City> getCitiesInDistrictDescending(String district) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getCitiesInDistrictByLargestToSmallestPopulation(district);
+    }
+
+    /**
+     * Connect to the DB
+     * @param location
+     */
     public void connect(String location) {
         String url = DB_URL_PREFIX + location + DB_URL_POSTFIX;
         dbDriver = new DBDriverMysql(url, DB_PASSWORD);
         dbDriver.connect();
     }
 
+    /**
+     * Disconnect from the DB
+     */
     public void disconnect() {
         dbDriver.disconnect();
     }
