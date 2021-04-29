@@ -217,10 +217,10 @@ public class WorldQueries {
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-                int result = -1;
+                long result = -1;
 
                 while(resultSet.first()) {
-                    result = resultSet.getInt("SUM(country.Population)");
+                    result = resultSet.getLong("SUM(country.Population)");
                 }
                 return result;
             }
