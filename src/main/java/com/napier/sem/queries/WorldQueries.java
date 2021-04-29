@@ -210,7 +210,7 @@ public class WorldQueries {
         try {
                 Statement stmt = conn.createStatement();
                 String query =
-                        "SELECT SUM(country.Population) "
+                        "SELECT SUM(country.Population) AS Population "
                                 + "FROM country ";
 
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -219,8 +219,8 @@ public class WorldQueries {
 
                 long result = -1;
 
-                while(resultSet.first()) {
-                    result = resultSet.getLong("SUM(country.Population)");
+                while(resultSet.next()) {
+                    result = resultSet.getLong("Population");
                 }
                 return result;
             }
