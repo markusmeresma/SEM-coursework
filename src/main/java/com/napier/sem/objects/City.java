@@ -8,6 +8,10 @@ public class City {
 
     private int population;
 
+    private String country;
+
+    private String district;
+
     /**
      *
      * @return ID
@@ -34,6 +38,18 @@ public class City {
 
     /**
      *
+     * @return country
+     */
+    public String getCountry() { return this.country; }
+
+    /**
+     *
+     * @return district
+     */
+    public String district() {return this.district; }
+
+    /**
+     *
      * @param _ID
      */
     public void setID(int _ID) {
@@ -55,4 +71,16 @@ public class City {
     public void setPopulation(int _population) {
         this.population = _population;
     }
+
+    /**
+     *
+     * @param _country
+     */
+    public void setCountry(String _country) { this.country = _country; }
+
+    /**
+     *
+     * @param _district
+     */
+    public void setDistrict(String _district) { this.district = _district; }
 }
