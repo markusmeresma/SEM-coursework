@@ -200,4 +200,34 @@ public class WorldQueries {
             return null;
         }
     }
+
+    /**
+     * Method to get a population of a country
+     * @return int
+     */
+    public int getWorldPopulation()
+    {
+        try {
+                Statement stmt = conn.createStatement();
+                String query =
+                        "SELECT SUM(country.Population) "
+                                + "FROM country ";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                int result = -1;
+
+                while(resultSet.next()) {
+                    result = resultSet.getInt("SUM(country.Population)");
+                }
+                return result;
+            }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country population");
+        }
+        return 0;
+    }
 }
