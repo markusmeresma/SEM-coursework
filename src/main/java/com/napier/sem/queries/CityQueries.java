@@ -84,6 +84,7 @@ public class CityQueries {
 
                 List<City> cities = new ArrayList<City>();
 
+
                 while(resultSet.next()) {
                     City city = new City();
                     city.setID(resultSet.getInt("city.ID"));
