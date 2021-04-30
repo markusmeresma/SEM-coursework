@@ -201,6 +201,11 @@ public class App {
         return cityQueries.getCitiesWithinContinentByPopulation(continent);
     }
 
+    public List<City> getTopNCapitalsInContinent(int N, String Continent) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getTopNCitiesByPopulationInContinent(N, Continent);
+    }
+
     /**
      * Connect to the DB
      * @param location

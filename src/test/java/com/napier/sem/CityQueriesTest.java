@@ -60,4 +60,17 @@ public class CityQueriesTest {
         assertEquals(expectedRows, actualRows);
         assertEquals(expectedTopPop, actualTopPop);
     }
+
+    @Test
+    public void getTopNCapitalsInContinent() {
+        String inputContinent = "Asia";
+        int topN = 5;
+        int expectedTopPop = 9981619;
+        List<City> query = app.getTopNCapitalsInContinent(topN, inputContinent);
+        int actualRows = query.size();
+        int actualTopPop = query.get(0).getPopulation();
+
+        assertEquals(topN, actualRows);
+        assertEquals(expectedTopPop, actualTopPop);
+    }
 }
