@@ -109,6 +109,50 @@ public class CityQueries {
         }
     }
 
+    /**
+     *
+     * @param country
+     * @return list of cities in country ordered by population
+     */
+    public List<City> getCitiesInCountryByLargestToSmallestPopulation(String country)
+    {
+        if (country == null || country.isEmpty()) {
+            throw new IllegalArgumentException("District is null or empty");
+        } else {
+            try {
+                Statement stmt = conn.createStatement();
+                String query =
+                        "SELECT city.ID, city.Name, country.Name, city.District, city.Population "
+                                + "FROM city JOIN country ON city.CountryCode = country.Code "
+                                + "WHERE country.Name LIKE ? "
+                                + "ORDER BY city.Population DESC";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, country);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<City> cities = new ArrayList<City>();
+
+
+                while(resultSet.next()) {
+                    City city = new City();
+                    city.setID(resultSet.getInt("city.ID"));
+                    city.setName(resultSet.getString("city.Name"));
+                    city.setCountry(resultSet.getString("country.Name"));
+                    city.setDistrict(resultSet.getString("city.District"));
+                    city.setPopulation(resultSet.getInt("city.Population"));
+                    cities.add(city);
+                }
+                return cities;
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get cities in country");
+            }
+            return null;
+        }
+    }
     public List<City> getTopNPopulatedCitiesInAContinentDescending(String continent, int n)
     {
         List<City> result = getCitiesInAContinentDescending(continent);

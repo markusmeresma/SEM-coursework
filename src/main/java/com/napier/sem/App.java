@@ -170,6 +170,11 @@ public class App {
         return worldQueries.getWorldPopulation();
     }
 
+    public List<City> getCitiesInCountryDescending(String country) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getCitiesInCountryByLargestToSmallestPopulation(country);
+    }
+
     /**
      * Gets top N populated cities in a continent organised by largest to smallest population
      * @param continent
