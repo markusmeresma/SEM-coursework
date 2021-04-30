@@ -196,6 +196,11 @@ public class App {
         return cityQueries.getTopNPopulatedCitiesInTheWorld(number);
     }
 
+    public List<City> getTopCitiesInContinent(String continent) {
+        CityQueries cityQueries = new CityQueries(dbDriver.getConn());
+        return cityQueries.getCitiesWithinContinentByPopulation(continent);
+    }
+
     /**
      * Connect to the DB
      * @param location

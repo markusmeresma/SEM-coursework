@@ -1,6 +1,7 @@
 package com.napier.sem.queries;
 
 import com.napier.sem.objects.City;
+import com.napier.sem.objects.Continent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -261,4 +262,47 @@ public class CityQueries {
         return result.subList(0, n);
     }
 
+    /**
+     * Method for getting a population of a continent
+     * @param continent
+     * @return list of cities ordered by population within a specified continent
+     */
+    public List<City> getCitiesWithinContinentByPopulation(String continent)
+    {
+        if (continent == null || continent.isEmpty()) {
+            throw new IllegalArgumentException("Continent is null or empty");
+        } else {
+            try {
+                Statement stmt = conn.createStatement();
+                String query =
+                        "SELECT city.Name, city.Population, country.Continent "
+                                + "FROM city "
+                                + "JOIN country ON city.CountryCode = country.Code "
+                                + "WHERE country.Continent LIKE ? "
+                                + "ORDER BY city.Population DESC";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, continent);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<City> cities = new ArrayList<City>();
+
+                if(resultSet.next()) {
+                    City city = new City();
+                    city.setName(resultSet.getString("city.Name"));
+                    city.setPopulation(resultSet.getInt("city.Population"));
+                    cities.add(city);
+                } else {
+                    throw new IllegalArgumentException("City not found");
+                }
+                return cities;
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get city populations");
+            }
+            return null;
+        }
+    }
 }

@@ -47,4 +47,17 @@ public class CityQueriesTest {
     public void getTopNPopulatedCitiesInTheWorld() {
         List<City> query = app.getTopNPopulatedCitiesInTheWorld(5000);
     }
+
+    @Test
+    public void getCitiesWithinContinent() {
+        String inputContinent = "Africa";
+        int expectedRows = 366;
+        int expectedTopPop = 6789479;
+        List<City> query = app.getTopCitiesInContinent(inputContinent);
+        int actualRows = query.size();
+        int actualTopPop = query.get(0).getPopulation();
+
+        assertEquals(expectedRows, actualRows);
+        assertEquals(expectedTopPop, actualTopPop);
+    }
 }
