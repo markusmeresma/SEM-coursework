@@ -288,13 +288,11 @@ public class CityQueries {
 
                 List<City> cities = new ArrayList<City>();
 
-                if(resultSet.next()) {
+                while(resultSet.next()) {
                     City city = new City();
                     city.setName(resultSet.getString("city.Name"));
                     city.setPopulation(resultSet.getInt("city.Population"));
                     cities.add(city);
-                } else {
-                    throw new IllegalArgumentException("City not found");
                 }
                 return cities;
 
