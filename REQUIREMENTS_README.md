@@ -21,12 +21,12 @@ This file shows a completed checklist of all the requirements asked and complete
 |14 | The top N populated cities in a region where N is provided by the user.                               | Yes            |       |       |
 |15 | The top N populated cities in a country where N is provided by the user.                              | Yes            |       |       | 
 |16 | The top N populated cities in a district where N is provided by the user.                             | Yes            |       |       |
-|17 | All the capital cities in the world organised by largest population to smallest.                      | Yes            |       |       |
+|17 | All the capital cities in the world organised by largest population to smallest.                      | No             |       |       |
 |18 | All the capital cities in a continent organised by largest population to smallest.                    | Yes            |       |       |
 |19 | All the capital cities in a region organised by largest to smallest.                                  | Yes            |       |       |
-|20 | The top N populated capital cities in the world where N is provided by the user.                      | Yes            |       |       |
+|20 | The top N populated capital cities in the world where N is provided by the user.                      | No             |       |       |
 |21 | The top N populated capital cities in a continent where N is provided by the user.                    | No             |       |       |
-|22 | The top N populated capital cities in a region where N is provided by the user.                       | Yes            |       |       |
+|22 | The top N populated capital cities in a region where N is provided by the user.                       | No             |       |       |
 |23 | The population of people, people living in cities, and people not living in cities in each continent. | No             |       |       |
 |24 | The population of people, people living in cities, and people not living in cities in each region.    | No             |       |       |
 |25 | The population of people, people living in cities, and people not living in cities in each country.   | No             |       |       |
@@ -38,4 +38,4 @@ This file shows a completed checklist of all the requirements asked and complete
 |31 | The population of a city.                                                                             | Yes            |       |       |
 |32 | the number of people who speak the following the following languages from greatest number to smallest,
 including the percentage of the world population: Chinese, English, Hindi, Arabic, Spanish                  | No             |       |       |
-|   |                                                                                                       |                |       | 27/32 (84.3%) |
+|   |                                                                                                       |                |       | 24/32 (75%) |
