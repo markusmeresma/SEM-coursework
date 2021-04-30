@@ -264,6 +264,9 @@ public class App {
                     numHolder = 0;
                     countryResult.clear();
                     cityResult.clear();
+
+                    long worldPopulation = app.getWorldPopulation();
+                    System.out.println(worldPopulation);
                     break;
                 case 0:
                     flag = false;
