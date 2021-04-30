@@ -31,10 +31,10 @@ public class CityQueriesTest {
         List<City> query = app.getCitiesInCountryDescending(inputCountry);
         int expectedRows = 93;
         int actualRows = query.size();
-        String expectedTopCity = "Berlin";
-        String actualTopCity = query.get(0).getName();
+        int expectedTopPop = 3386667;
+        int actualTopPop = query.get(0).getPopulation();
 
         assertEquals(expectedRows, actualRows);
-        assertEquals(expectedTopCity, actualTopCity);
+        assertEquals(expectedTopPop, actualTopPop);
     }
 }
